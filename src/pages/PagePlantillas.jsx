@@ -1,14 +1,21 @@
 import { useState } from 'react';
 import Icon from '../components/Icon.jsx';
-import { PLANTILLAS } from './mockExtra.js';
+import RowMenu from '../components/RowMenu.jsx';
+import { useStore } from '../store/StoreContext.jsx';
 
-export default function PagePlantillas() {
+export default function PagePlantillas({ onNew }) {
+  const { state, dispatch } = useStore();
   const [cat, setCat] = useState('todas');
   const cats = ['todas', 'Laboral', 'Comercial', 'Civil', 'Familia', 'General'];
-  const list = PLANTILLAS.filter((p) => cat === 'todas' || p.cat === cat);
+
+  const list = state.plantillas.filter((p) => cat === 'todas' || p.cat === cat);
   const counts = Object.fromEntries(
-    cats.map((c) => [c, c === 'todas' ? PLANTILLAS.length : PLANTILLAS.filter((p) => p.cat === c).length])
+    cats.map((c) => [c, c === 'todas' ? state.plantillas.length : state.plantillas.filter((p) => p.cat === c).length])
   );
+
+  const del = (id, nombre) => {
+    if (window.confirm(`¿Eliminar plantilla "${nombre}"?`)) dispatch({ type: 'PLANTILLA_DELETE', payload: { id } });
+  };
 
   return (
     <div>
@@ -19,7 +26,9 @@ export default function PagePlantillas() {
         </div>
         <div className="row" style={{ gap: 8 }}>
           <button className="btn btn-secondary"><Icon name="upload" size={14}/> Importar</button>
-          <button className="btn btn-primary"><Icon name="plus" size={15}/> Nueva plantilla</button>
+          <button className="btn btn-primary" onClick={() => onNew('plantilla')}>
+            <Icon name="plus" size={15}/> Nueva plantilla
+          </button>
         </div>
       </div>
       <div className="card">
@@ -32,12 +41,15 @@ export default function PagePlantillas() {
         </div>
         <div style={{ padding: 18, display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))', gap: 14 }}>
           {list.map((p) => (
-            <div key={p.id} className="card" style={{ padding: 16, cursor: 'pointer', boxShadow: 'none' }}>
-              <div className="row" style={{ gap: 10, marginBottom: 10 }}>
-                <div className="stat-icon blue" style={{ width: 38, height: 38, borderRadius: 8 }}>
-                  <Icon name="doc" size={17}/>
+            <div key={p.id} className="card" style={{ padding: 16, boxShadow: 'none' }}>
+              <div className="between" style={{ marginBottom: 10 }}>
+                <div className="row" style={{ gap: 10 }}>
+                  <div className="stat-icon blue" style={{ width: 38, height: 38, borderRadius: 8 }}>
+                    <Icon name="doc" size={17}/>
+                  </div>
+                  <span className="pill muted"><span className="pill-dot"/>{p.cat}</span>
                 </div>
-                <span className="pill muted"><span className="pill-dot"/>{p.cat}</span>
+                <RowMenu items={[{ label: 'Eliminar', icon: 'trash', danger: true, onClick: () => del(p.id, p.nombre) }]}/>
               </div>
               <div style={{ fontSize: 14, fontWeight: 700, color: 'var(--c-text)', marginBottom: 6, lineHeight: 1.3 }}>
                 {p.nombre}
@@ -49,6 +61,9 @@ export default function PagePlantillas() {
               </div>
             </div>
           ))}
+          {list.length === 0 && (
+            <div className="muted" style={{ padding: 24, textAlign: 'center', gridColumn: '1 / -1' }}>Sin plantillas.</div>
+          )}
         </div>
       </div>
     </div>

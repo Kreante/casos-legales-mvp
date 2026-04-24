@@ -1,8 +1,14 @@
 import Icon from '../components/Icon.jsx';
 import Avatar from '../components/Avatar.jsx';
-import { USUARIOS } from './mockExtra.js';
+import RowMenu from '../components/RowMenu.jsx';
+import { useStore } from '../store/StoreContext.jsx';
 
-export default function PageUsuarios() {
+export default function PageUsuarios({ onNew }) {
+  const { state, dispatch } = useStore();
+  const del = (id, nombre) => {
+    if (window.confirm(`¿Eliminar usuario "${nombre}"?`)) dispatch({ type: 'USUARIO_DELETE', payload: { id } });
+  };
+
   return (
     <div>
       <div className="page-head">
@@ -11,19 +17,15 @@ export default function PageUsuarios() {
           <p className="page-subtitle">Gestión de cuentas, roles y permisos del estudio</p>
         </div>
         <div className="row" style={{ gap: 8 }}>
-          <button className="btn btn-secondary"><Icon name="mail" size={14}/> Invitar</button>
-          <button className="btn btn-primary"><Icon name="plus" size={15}/> Nuevo usuario</button>
+          <button className="btn btn-secondary" onClick={() => onNew('usuario')}>
+            <Icon name="mail" size={14}/> Invitar
+          </button>
+          <button className="btn btn-primary" onClick={() => onNew('usuario')}>
+            <Icon name="plus" size={15}/> Nuevo usuario
+          </button>
         </div>
       </div>
       <div className="card">
-        <div className="filter-bar">
-          <div className="filter-input">
-            <Icon name="search" size={14}/>
-            <input placeholder="Buscar usuarios…"/>
-          </div>
-          <button className="btn btn-secondary btn-sm">Rol <Icon name="chevron-down" size={12}/></button>
-          <button className="btn btn-secondary btn-sm">Equipo <Icon name="chevron-down" size={12}/></button>
-        </div>
         <table className="table">
           <thead>
             <tr>
@@ -31,7 +33,7 @@ export default function PageUsuarios() {
             </tr>
           </thead>
           <tbody>
-            {USUARIOS.map((u) => (
+            {state.usuarios.map((u) => (
               <tr key={u.id} className="row-link">
                 <td>
                   <div className="row" style={{ gap: 10 }}>
@@ -56,12 +58,23 @@ export default function PageUsuarios() {
                 <td className="muted" style={{ fontSize: 12.5 }}>{u.ult}</td>
                 <td>
                   <div className="row" style={{ gap: 4, justifyContent: 'flex-end' }}>
-                    <button className="menu-btn" title="Editar"><Icon name="pencil" size={14}/></button>
-                    <button className="menu-btn"><Icon name="more" size={15}/></button>
+                    <RowMenu
+                      items={[
+                        {
+                          label: u.estado === 'Activo' ? 'Desactivar' : 'Activar',
+                          icon: 'check',
+                          onClick: () => dispatch({ type: 'USUARIO_TOGGLE_ESTADO', payload: { id: u.id } }),
+                        },
+                        { label: 'Eliminar', icon: 'trash', danger: true, onClick: () => del(u.id, u.nombre) },
+                      ]}
+                    />
                   </div>
                 </td>
               </tr>
             ))}
+            {state.usuarios.length === 0 && (
+              <tr><td colSpan={6} className="muted" style={{ padding: 24, textAlign: 'center' }}>Sin usuarios.</td></tr>
+            )}
           </tbody>
         </table>
       </div>

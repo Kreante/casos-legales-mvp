@@ -1173,3 +1173,7 @@ button { font: inherit; color: inherit; }
 ::-webkit-scrollbar { width: 10px; height: 10px; }
 ::-webkit-scrollbar-thumb { background: var(--c-border-2); border-radius: 8px; border: 2px solid var(--c-bg); }
 ::-webkit-scrollbar-track { background: transparent; }
+
+/* Densidad de tabla (controlada por settings) */
+body.density-compact .table td, body.density-compact .table th { padding: 8px 16px; }
+body.density-comfy   .table td, body.density-comfy   .table th { padding: 18px 24px; }

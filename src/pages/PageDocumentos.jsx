@@ -1,18 +1,30 @@
 import { useState } from 'react';
 import Icon from '../components/Icon.jsx';
 import Avatar from '../components/Avatar.jsx';
-import { DOCUMENTOS } from './mockExtra.js';
+import RowMenu from '../components/RowMenu.jsx';
+import { useStore } from '../store/StoreContext.jsx';
 
-export default function PageDocumentos({ onCase }) {
+export default function PageDocumentos({ onCase, onNew }) {
+  const { state, dispatch } = useStore();
   const [tab, setTab] = useState('todos');
   const [q, setQ] = useState('');
   const tipos = ['Demanda','Contrato','Pericia','Escrito','Poder','Notificación'];
 
-  const list = DOCUMENTOS.filter((d) => {
+  const casoTitulo = (id) => state.casos.find((c) => c.id === id)?.titulo || id || '—';
+
+  const list = state.documentos.filter((d) => {
     if (tab !== 'todos' && d.tipo.toLowerCase() !== tab) return false;
-    if (q && !(`${d.nombre} ${d.caso}`.toLowerCase().includes(q.toLowerCase()))) return false;
+    const hay = `${d.nombre} ${casoTitulo(d.casoId)}`.toLowerCase();
+    if (q && !hay.includes(q.toLowerCase())) return false;
     return true;
   });
+
+  const firmadosMes = state.documentos.filter((d) => d.firmado).length;
+  const pendientes = state.documentos.filter((d) => !d.firmado).length;
+
+  const del = (id, nombre) => {
+    if (window.confirm(`¿Eliminar documento "${nombre}"?`)) dispatch({ type: 'DOCUMENTO_DELETE', payload: { id } });
+  };
 
   return (
     <div>
@@ -22,17 +34,21 @@ export default function PageDocumentos({ onCase }) {
           <p className="page-subtitle">Repositorio centralizado de escritos, contratos y piezas digitales</p>
         </div>
         <div className="row" style={{ gap: 8 }}>
-          <button className="btn btn-secondary"><Icon name="upload" size={14}/> Subir documento</button>
-          <button className="btn btn-primary"><Icon name="plus" size={15}/> Nuevo desde plantilla</button>
+          <button className="btn btn-secondary" onClick={() => onNew('documento')}>
+            <Icon name="upload" size={14}/> Subir documento
+          </button>
+          <button className="btn btn-primary" onClick={() => onNew('documento')}>
+            <Icon name="plus" size={15}/> Nuevo desde plantilla
+          </button>
         </div>
       </div>
 
       <div className="stats-grid" style={{ gridTemplateColumns: 'repeat(4, 1fr)' }}>
         {[
-          { l: 'Total documentos', v: '342', i: 'doc',  c: 'navy' },
-          { l: 'Firmados este mes', v: '32', i: 'check-square', c: 'green' },
-          { l: 'Pendientes de firma', v: '8',  i: 'clock', c: 'amber' },
-          { l: 'Subidos hoy', v: '6', i: 'upload', c: 'blue' },
+          { l: 'Total documentos', v: String(state.documentos.length), i: 'doc',  c: 'navy' },
+          { l: 'Firmados',          v: String(firmadosMes), i: 'check-square', c: 'green' },
+          { l: 'Pendientes de firma', v: String(pendientes),  i: 'clock', c: 'amber' },
+          { l: 'Último subido', v: state.documentos[0]?.fecha || '—', i: 'upload', c: 'blue' },
         ].map((s, i) => (
           <div className="stat" key={i}>
             <div>
@@ -50,19 +66,16 @@ export default function PageDocumentos({ onCase }) {
             <Icon name="search" size={14}/>
             <input value={q} onChange={(e) => setQ(e.target.value)} placeholder="Buscar por nombre o caso…"/>
           </div>
-          <button className="btn btn-secondary btn-sm">Caso <Icon name="chevron-down" size={12}/></button>
-          <button className="btn btn-secondary btn-sm">Autor <Icon name="chevron-down" size={12}/></button>
-          <button className="btn btn-secondary btn-sm">Fecha <Icon name="chevron-down" size={12}/></button>
           <div style={{ flex: 1 }}/>
-          <span className="muted" style={{ fontSize: 12.5 }}>{list.length} de {DOCUMENTOS.length}</span>
+          <span className="muted" style={{ fontSize: 12.5 }}>{list.length} de {state.documentos.length}</span>
         </div>
         <div className="tabs">
           <button className={`tab ${tab === 'todos' ? 'active' : ''}`} onClick={() => setTab('todos')}>
-            Todos <span className="tab-count">{DOCUMENTOS.length}</span>
+            Todos <span className="tab-count">{state.documentos.length}</span>
           </button>
           {tipos.map((t) => {
             const id = t.toLowerCase();
-            const n = DOCUMENTOS.filter((d) => d.tipo === t).length;
+            const n = state.documentos.filter((d) => d.tipo === t).length;
             return (
               <button key={id} className={`tab ${tab === id ? 'active' : ''}`} onClick={() => setTab(id)}>
                 {t} <span className="tab-count">{n}</span>
@@ -73,14 +86,8 @@ export default function PageDocumentos({ onCase }) {
         <table className="table">
           <thead>
             <tr>
-              <th>Documento</th>
-              <th>Tipo</th>
-              <th>Caso</th>
-              <th>Autor</th>
-              <th>Tamaño</th>
-              <th>Fecha</th>
-              <th>Estado</th>
-              <th></th>
+              <th>Documento</th><th>Tipo</th><th>Caso</th><th>Autor</th>
+              <th>Tamaño</th><th>Fecha</th><th>Estado</th><th></th>
             </tr>
           </thead>
           <tbody>
@@ -98,7 +105,7 @@ export default function PageDocumentos({ onCase }) {
                   </div>
                 </td>
                 <td><span className="pill muted"><span className="pill-dot"/>{d.tipo}</span></td>
-                <td style={{ fontSize: 13 }}>{d.caso}</td>
+                <td style={{ fontSize: 13 }}>{casoTitulo(d.casoId)}</td>
                 <td>
                   <div className="row" style={{ gap: 8 }}>
                     <Avatar name={d.autor} idx={d.idx} size="sm"/>
@@ -117,13 +124,23 @@ export default function PageDocumentos({ onCase }) {
                     <button className="menu-btn" title="Descargar" onClick={(e) => e.stopPropagation()}>
                       <Icon name="download" size={14}/>
                     </button>
-                    <button className="menu-btn" onClick={(e) => e.stopPropagation()}>
-                      <Icon name="more" size={15}/>
-                    </button>
+                    <RowMenu
+                      items={[
+                        {
+                          label: d.firmado ? 'Marcar como pendiente' : 'Marcar como firmado',
+                          icon: 'check',
+                          onClick: () => dispatch({ type: 'DOCUMENTO_TOGGLE_FIRMA', payload: { id: d.id } }),
+                        },
+                        { label: 'Eliminar', icon: 'trash', danger: true, onClick: () => del(d.id, d.nombre) },
+                      ]}
+                    />
                   </div>
                 </td>
               </tr>
             ))}
+            {list.length === 0 && (
+              <tr><td colSpan={8} className="muted" style={{ padding: 24, textAlign: 'center' }}>Sin documentos.</td></tr>
+            )}
           </tbody>
         </table>
       </div>

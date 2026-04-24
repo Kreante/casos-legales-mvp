@@ -249,7 +249,80 @@ function buildSeed() {
     { id: 'a6', titulo: 'Tasa judicial vencida', sub: 'Caso 01678/2026 — Cooperativa El Surco', when: 'Hace 2 días', kind: 'danger' },
   ];
 
-  return { casos, tareas, eventos, notificaciones };
+  const contactos = [
+    { id: 'c1', nombre: 'Juan Pérez',          tipo: 'Cliente',     empresa: 'Industrias del Norte S.A.', email: 'jperez@industriasnorte.com', tel: '+54 11 4523-1289', casos: 2, idx: 1 },
+    { id: 'c2', nombre: 'María López',         tipo: 'Cliente',     empresa: 'Constructora Andina SRL',   email: 'maria.lopez@constructoraandina.com.ar', tel: '+54 11 5232-7841', casos: 1, idx: 2 },
+    { id: 'c3', nombre: 'Carlos Ramírez',      tipo: 'Cliente',     empresa: 'Comercializadora Sur S.A.', email: 'cramirez@comsur.com', tel: '+54 11 6213-0027', casos: 3, idx: 3 },
+    { id: 'c4', nombre: 'Dr. Roberto Vázquez', tipo: 'Contraparte', empresa: 'Estudio Vázquez & Asoc.',   email: 'rvazquez@vazquez.legal', tel: '+54 11 4801-1010', casos: 1, idx: 4 },
+    { id: 'c5', nombre: 'Lic. Susana Aguirre', tipo: 'Perito',      empresa: 'Pericias Contables SRL',   email: 's.aguirre@periciascon.com', tel: '+54 11 4233-9921', casos: 4, idx: 5 },
+    { id: 'c6', nombre: 'Banco del Plata',     tipo: 'Cliente',     empresa: 'Banco del Plata S.A.',     email: 'legales@bdelplata.com', tel: '+54 11 5500-2300', casos: 5, idx: 2 },
+    { id: 'c7', nombre: 'Vega Corporativo',    tipo: 'Cliente',     empresa: 'Vega Corporativo S.A.',    email: 'legales@vegacorp.com.ar', tel: '+54 11 4322-7700', casos: 2, idx: 6 },
+  ];
+
+  const documentos = [
+    { id: 'd1', nombre: 'Demanda — Pérez c/ Industrias del Norte.pdf', tipo: 'Demanda',      casoId: '00123/2026', tamano: '2.4 MB', fecha: fmtFecha(new Date()), autor: 'Ana Martínez', idx: 1, firmado: true },
+    { id: 'd2', nombre: 'Contrato de honorarios.docx',                  tipo: 'Contrato',     casoId: '00456/2026', tamano: '184 KB', fecha: fmtFecha(new Date()), autor: 'Diego Ramírez', idx: 2, firmado: true },
+    { id: 'd3', nombre: 'Pericia contable preliminar.pdf',              tipo: 'Pericia',      casoId: '01567/2026', tamano: '5.1 MB', fecha: fmtFecha(new Date(Date.now() - 86400000)), autor: 'Laura Sánchez', idx: 3, firmado: false },
+    { id: 'd4', nombre: 'Escrito de contestación.pdf',                  tipo: 'Escrito',      casoId: '01011/2026', tamano: '780 KB', fecha: fmtFecha(new Date(Date.now() - 2*86400000)), autor: 'Ana Martínez', idx: 1, firmado: true },
+    { id: 'd5', nombre: 'Poder notarial.pdf',                           tipo: 'Poder',        casoId: '00789/2026', tamano: '320 KB', fecha: fmtFecha(new Date(Date.now() - 3*86400000)), autor: 'Laura Sánchez', idx: 3, firmado: true },
+    { id: 'd6', nombre: 'Notificación judicial.pdf',                    tipo: 'Notificación', casoId: '01678/2026', tamano: '210 KB', fecha: fmtFecha(new Date(Date.now() - 4*86400000)), autor: 'Ana Martínez', idx: 1, firmado: false },
+    { id: 'd7', nombre: 'Acuerdo de confidencialidad.docx',             tipo: 'Contrato',     casoId: '01567/2026', tamano: '92 KB',  fecha: fmtFecha(new Date(Date.now() - 6*86400000)), autor: 'Laura Sánchez', idx: 3, firmado: true },
+  ];
+
+  const facturas = [
+    { id: 'F-2026-0214', cliente: 'Industrias del Norte S.A.',  fecha: fmtFecha(new Date()),                          vto: fmtFecha(new Date(Date.now() + 30*86400000)), monto: '$ 285.000', estado: 'Emitida' },
+    { id: 'F-2026-0213', cliente: 'Constructora Andina SRL',    fecha: fmtFecha(new Date(Date.now() - 3*86400000)),   vto: fmtFecha(new Date(Date.now() + 27*86400000)), monto: '$ 412.500', estado: 'Pagada' },
+    { id: 'F-2026-0212', cliente: 'Comercializadora Sur S.A.',  fecha: fmtFecha(new Date(Date.now() - 6*86400000)),   vto: fmtFecha(new Date(Date.now() + 24*86400000)), monto: '$ 175.000', estado: 'Pagada' },
+    { id: 'F-2026-0211', cliente: 'Vega Corporativo S.A.',      fecha: fmtFecha(new Date(Date.now() - 40*86400000)),  vto: fmtFecha(new Date(Date.now() - 10*86400000)), monto: '$ 620.000', estado: 'Vencida' },
+    { id: 'F-2026-0210', cliente: 'Banco del Plata',            fecha: fmtFecha(new Date(Date.now() - 13*86400000)),  vto: fmtFecha(new Date(Date.now() + 17*86400000)), monto: '$ 348.000', estado: 'Emitida' },
+    { id: 'F-2026-0209', cliente: 'Cooperativa El Surco',       fecha: fmtFecha(new Date(Date.now() - 18*86400000)),  vto: fmtFecha(new Date(Date.now() + 12*86400000)), monto: '$ 98.500',  estado: 'Pagada' },
+  ];
+
+  const plantillas = [
+    { id: 'p1', nombre: 'Demanda laboral por despido sin causa', cat: 'Laboral',   uso: 28, actu: fmtFecha(new Date(Date.now() - 12*86400000)) },
+    { id: 'p2', nombre: 'Contestación de demanda comercial',     cat: 'Comercial', uso: 19, actu: fmtFecha(new Date(Date.now() - 16*86400000)) },
+    { id: 'p3', nombre: 'Recurso de apelación',                  cat: 'General',   uso: 14, actu: fmtFecha(new Date(Date.now() - 22*86400000)) },
+    { id: 'p4', nombre: 'Convenio de divorcio',                  cat: 'Familia',   uso: 11, actu: fmtFecha(new Date(Date.now() - 27*86400000)) },
+    { id: 'p5', nombre: 'Acuerdo de confidencialidad (NDA)',     cat: 'Comercial', uso: 22, actu: fmtFecha(new Date(Date.now() - 34*86400000)) },
+    { id: 'p6', nombre: 'Poder general judicial',                cat: 'General',   uso: 36, actu: fmtFecha(new Date(Date.now() - 40*86400000)) },
+    { id: 'p7', nombre: 'Carta documento intimación',            cat: 'General',   uso: 41, actu: fmtFecha(new Date(Date.now() - 45*86400000)) },
+    { id: 'p8', nombre: 'Acuerdo transaccional laboral',         cat: 'Laboral',   uso: 9,  actu: fmtFecha(new Date(Date.now() - 50*86400000)) },
+  ];
+
+  const recordatorios = [
+    { id: 'r1', titulo: 'Renovar suscripción ColectaWeb',         casoId: null,         fecha: fmtFecha(new Date(Date.now() + 2*86400000)), hora: '09:00', tipo: 'Administrativo', kind: 'warn',   leido: false },
+    { id: 'r2', titulo: 'Llamar a perito contable',               casoId: '01567/2026', fecha: fmtFecha(new Date(Date.now() + 1*86400000)), hora: '11:30', tipo: 'Llamada',         kind: 'info',   leido: false },
+    { id: 'r3', titulo: 'Verificar pago de tasa judicial',        casoId: '01678/2026', fecha: fmtFecha(new Date()),                        hora: '14:00', tipo: 'Plazo',           kind: 'danger', leido: false },
+    { id: 'r4', titulo: 'Reunión interna seguimiento de cartera', casoId: null,         fecha: fmtFecha(new Date(Date.now() + 4*86400000)), hora: '10:00', tipo: 'Reunión',         kind: 'info',   leido: false },
+    { id: 'r5', titulo: 'Actualizar honorarios trimestre',        casoId: null,         fecha: fmtFecha(new Date(Date.now() + 8*86400000)), hora: '17:00', tipo: 'Administrativo', kind: 'info',   leido: true },
+  ];
+
+  const equipos = [
+    { id: 'eq1', nombre: 'Laboral',          lider: 'Ana Martínez',  lid: 1, miembros: 4, casos: 12 },
+    { id: 'eq2', nombre: 'Comercial',        lider: 'Diego Ramírez', lid: 2, miembros: 5, casos: 18 },
+    { id: 'eq3', nombre: 'Civil y Familia',  lider: 'Laura Sánchez', lid: 3, miembros: 3, casos: 9  },
+    { id: 'eq4', nombre: 'Contencioso Adm.', lider: 'Diego Ramírez', lid: 2, miembros: 2, casos: 5  },
+  ];
+
+  const usuarios = [
+    { id: 'u1', nombre: 'Ana Martínez',    email: 'ana@estudio.legal',     rol: 'Admin',     equipo: 'Laboral',         estado: 'Activo',   ult: 'Hace 2 min',  idx: 1 },
+    { id: 'u2', nombre: 'Diego Ramírez',   email: 'diego@estudio.legal',   rol: 'Abogado',   equipo: 'Comercial',       estado: 'Activo',   ult: 'Hace 12 min', idx: 2 },
+    { id: 'u3', nombre: 'Laura Sánchez',   email: 'laura@estudio.legal',   rol: 'Abogada',   equipo: 'Civil y Familia', estado: 'Activo',   ult: 'Hace 1 h',    idx: 3 },
+    { id: 'u4', nombre: 'Sofía García',    email: 'sofia@estudio.legal',   rol: 'Paralegal', equipo: 'Laboral',         estado: 'Activo',   ult: 'Hace 3 h',    idx: 4 },
+    { id: 'u5', nombre: 'Martín Ibáñez',   email: 'martin@estudio.legal',  rol: 'Paralegal', equipo: 'Comercial',       estado: 'Inactivo', ult: 'Hace 4 días', idx: 5 },
+    { id: 'u6', nombre: 'Camila Ruiz',     email: 'camila@estudio.legal',  rol: 'Asistente', equipo: 'Comercial',       estado: 'Activo',   ult: 'Hace 5 h',    idx: 6 },
+  ];
+
+  const settings = {
+    theme: 'light',      // light | dark
+    sidebar: 'dark',     // dark | light
+    accent: 'indigo',    // indigo | violet | cobalt | emerald | ochre
+    density: 'standard', // compact | standard | comfy
+    notif: { email: true, push: true, audiencia: true, plazos: true, reportes: false },
+    seg:   { twofa: true, autoLogout: true, auditoria: false },
+  };
+
+  return { casos, tareas, eventos, notificaciones, contactos, documentos, facturas, plantillas, recordatorios, equipos, usuarios, settings };
 }
 
 export const SEED = buildSeed();

@@ -1,10 +1,15 @@
 import { useState } from 'react';
 import Icon from '../components/Icon.jsx';
+import { useStore } from '../store/StoreContext.jsx';
 
 export default function PageConfig() {
+  const { state, dispatch } = useStore();
+  const s = state.settings;
   const [section, setSection] = useState('general');
-  const [notif, setNotif] = useState({ email: true, push: true, audiencia: true, plazos: true, reportes: false });
-  const [seg, setSeg] = useState({ '2fa': true, auto: true, audit: false });
+
+  const update = (patch) => dispatch({ type: 'SETTINGS_UPDATE', payload: patch });
+  const setNotif = (k) => update({ notif: { ...s.notif, [k]: !s.notif[k] } });
+  const setSeg = (k) => update({ seg: { ...s.seg, [k]: !s.seg[k] } });
 
   const sections = [
     { id: 'general',  label: 'General',           icon: 'settings' },
@@ -25,13 +30,13 @@ export default function PageConfig() {
       </div>
       <div className="settings-grid">
         <nav className="settings-nav">
-          {sections.map((s) => (
+          {sections.map((sec) => (
             <button
-              key={s.id}
-              className={`sn-item ${section === s.id ? 'active' : ''}`}
-              onClick={() => setSection(s.id)}
+              key={sec.id}
+              className={`sn-item ${section === sec.id ? 'active' : ''}`}
+              onClick={() => setSection(sec.id)}
             >
-              <Icon name={s.icon} size={15}/> {s.label}
+              <Icon name={sec.icon} size={15}/> {sec.label}
             </button>
           ))}
         </nav>
@@ -77,22 +82,39 @@ export default function PageConfig() {
                   <div>
                     <div className="kv-label">Tema</div>
                     <div className="seg" style={{ maxWidth: 280, marginTop: 8 }}>
-                      <button className="active">Claro</button><button>Oscuro</button><button>Sistema</button>
+                      {[['light','Claro'],['dark','Oscuro']].map(([k, l]) => (
+                        <button key={k} className={s.theme === k ? 'active' : ''} onClick={() => update({ theme: k })}>{l}</button>
+                      ))}
+                    </div>
+                  </div>
+                  <div>
+                    <div className="kv-label">Barra lateral</div>
+                    <div className="seg" style={{ maxWidth: 280, marginTop: 8 }}>
+                      {[['dark','Oscura'],['light','Clara']].map(([k, l]) => (
+                        <button key={k} className={s.sidebar === k ? 'active' : ''} onClick={() => update({ sidebar: k })}>{l}</button>
+                      ))}
+                    </div>
+                  </div>
+                  <div>
+                    <div className="kv-label">Color de acento</div>
+                    <div className="seg" style={{ maxWidth: 420, marginTop: 8, flexWrap: 'wrap' }}>
+                      {[['indigo','Indigo'],['violet','Violeta'],['cobalt','Cobalto'],['emerald','Esmeralda'],['ochre','Ocre']].map(([k, l]) => (
+                        <button key={k} className={s.accent === k ? 'active' : ''} onClick={() => update({ accent: k })}>{l}</button>
+                      ))}
                     </div>
                   </div>
                   <div>
                     <div className="kv-label">Densidad de tabla</div>
                     <div className="seg" style={{ maxWidth: 280, marginTop: 8 }}>
-                      <button>Cómoda</button><button className="active">Estándar</button><button>Compacta</button>
+                      {[['comfy','Cómoda'],['standard','Estándar'],['compact','Compacta']].map(([k, l]) => (
+                        <button key={k} className={s.density === k ? 'active' : ''} onClick={() => update({ density: k })}>{l}</button>
+                      ))}
                     </div>
                   </div>
                 </div>
               </div>
               <div className="section-card" style={{ borderBottom: 'none' }}>
-                <div className="row" style={{ gap: 8, justifyContent: 'flex-end' }}>
-                  <button className="btn btn-ghost btn-sm">Cancelar</button>
-                  <button className="btn btn-primary btn-sm">Guardar cambios</button>
-                </div>
+                <div className="muted" style={{ fontSize: 12.5 }}>Los cambios se aplican automáticamente y se guardan en tu dispositivo.</div>
               </div>
             </>
           )}
@@ -106,15 +128,6 @@ export default function PageConfig() {
                 <div className="field"><label>Email de contacto</label><input defaultValue="contacto@estudio.legal"/></div>
                 <div className="field" style={{ gridColumn: '1/-1' }}>
                   <label>Domicilio</label><input defaultValue="Av. Corrientes 1234, Piso 7, CABA"/>
-                </div>
-                <div className="field" style={{ gridColumn: '1/-1' }}>
-                  <label>Logo</label>
-                  <div className="row" style={{ gap: 12 }}>
-                    <div className="stat-icon" style={{ width: 56, height: 56, borderRadius: 8 }}>
-                      <Icon name="scale" size={24}/>
-                    </div>
-                    <button className="btn btn-secondary btn-sm"><Icon name="upload" size={14}/> Subir nuevo</button>
-                  </div>
                 </div>
               </div>
               <div className="row" style={{ gap: 8, justifyContent: 'flex-end', marginTop: 18 }}>
@@ -140,8 +153,8 @@ export default function PageConfig() {
                     </div>
                     <button
                       className="toggle-sw"
-                      data-on={notif[k] ? 'true' : 'false'}
-                      onClick={() => setNotif((p) => ({ ...p, [k]: !p[k] }))}
+                      data-on={s.notif[k] ? 'true' : 'false'}
+                      onClick={() => setNotif(k)}
                     />
                   </div>
                 ))}
@@ -153,20 +166,18 @@ export default function PageConfig() {
               <div className="sc-head"><h4 className="sc-title">Integraciones disponibles</h4></div>
               <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(220px, 1fr))', gap: 12 }}>
                 {[
-                  { n: 'Sistema de Notificaciones Electrónicas', s: 'Conectado',    k: 'success' },
-                  { n: 'MEV / Mesa de Entradas Virtual',          s: 'Conectado',    k: 'success' },
-                  { n: 'AFIP — Facturación electrónica',          s: 'Conectado',    k: 'success' },
-                  { n: 'Google Calendar',                          s: 'Desconectado', k: 'muted' },
-                  { n: 'Microsoft Outlook',                        s: 'Desconectado', k: 'muted' },
-                  { n: 'Mercado Pago',                             s: 'Conectado',    k: 'success' },
+                  { n: 'Sistema de Notificaciones Electrónicas', k: 'success', s: 'Conectado' },
+                  { n: 'MEV / Mesa de Entradas Virtual',          k: 'success', s: 'Conectado' },
+                  { n: 'AFIP — Facturación electrónica',          k: 'success', s: 'Conectado' },
+                  { n: 'Google Calendar',                          k: 'muted',   s: 'Desconectado' },
+                  { n: 'Microsoft Outlook',                        k: 'muted',   s: 'Desconectado' },
+                  { n: 'Mercado Pago',                             k: 'success', s: 'Conectado' },
                 ].map((it, i) => (
                   <div className="card" key={i} style={{ padding: 16, boxShadow: 'none' }}>
                     <div style={{ fontSize: 13.5, fontWeight: 700, marginBottom: 8 }}>{it.n}</div>
                     <div className="between">
                       <span className={`pill ${it.k}`}><span className="pill-dot"/>{it.s}</span>
-                      <button className="btn btn-secondary btn-sm">
-                        {it.k === 'success' ? 'Configurar' : 'Conectar'}
-                      </button>
+                      <button className="btn btn-secondary btn-sm">{it.k === 'success' ? 'Configurar' : 'Conectar'}</button>
                     </div>
                   </div>
                 ))}
@@ -195,20 +206,16 @@ export default function PageConfig() {
               <div className="sc-head"><h4 className="sc-title">Seguridad de la cuenta</h4></div>
               <div style={{ display: 'flex', flexDirection: 'column', gap: 4 }}>
                 {[
-                  ['2fa',   'Autenticación en dos pasos (2FA)', 'Solicitar código adicional al iniciar sesión.'],
-                  ['auto',  'Cierre de sesión automático',      'Cerrar sesión tras 30 min de inactividad.'],
-                  ['audit', 'Auditoría de accesos',             'Registrar dispositivos e IPs con acceso.'],
+                  ['twofa',      'Autenticación en dos pasos (2FA)', 'Solicitar código adicional al iniciar sesión.'],
+                  ['autoLogout', 'Cierre de sesión automático',       'Cerrar sesión tras 30 min de inactividad.'],
+                  ['auditoria',  'Auditoría de accesos',              'Registrar dispositivos e IPs con acceso.'],
                 ].map(([k, label, desc]) => (
                   <div key={k} className="between" style={{ padding: '14px 0', borderTop: '1px solid var(--c-divider)' }}>
                     <div>
                       <div style={{ fontSize: 14, fontWeight: 600 }}>{label}</div>
                       <div className="muted" style={{ fontSize: 12.5, marginTop: 2 }}>{desc}</div>
                     </div>
-                    <button
-                      className="toggle-sw"
-                      data-on={seg[k] ? 'true' : 'false'}
-                      onClick={() => setSeg((p) => ({ ...p, [k]: !p[k] }))}
-                    />
+                    <button className="toggle-sw" data-on={s.seg[k] ? 'true' : 'false'} onClick={() => setSeg(k)}/>
                   </div>
                 ))}
                 <div style={{ marginTop: 18 }}>

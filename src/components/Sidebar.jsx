@@ -26,7 +26,7 @@ export default function Sidebar({ current, onNav, user }) {
       { id: 'reportes',     label: 'Reportes',      icon: 'chart' },
       { id: 'facturacion',  label: 'Facturación',   icon: 'dollar' },
       { id: 'plantillas',   label: 'Plantillas',    icon: 'doc' },
-      { id: 'recordatorios',label: 'Recordatorios', icon: 'bell' },
+      { id: 'recordatorios',label: 'Recordatorios', icon: 'bell', badge: (() => { const n = state.recordatorios?.filter((r) => !r.leido).length || 0; return n > 0 ? String(n) : null; })() },
     ]},
     { section: 'Configuración', items: [
       { id: 'equipos',  label: 'Equipos',       icon: 'users' },

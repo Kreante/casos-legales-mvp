@@ -1,8 +1,14 @@
 import Icon from '../components/Icon.jsx';
 import Avatar from '../components/Avatar.jsx';
-import { EQUIPOS } from './mockExtra.js';
+import RowMenu from '../components/RowMenu.jsx';
+import { useStore } from '../store/StoreContext.jsx';
 
-export default function PageEquipos() {
+export default function PageEquipos({ onNew }) {
+  const { state, dispatch } = useStore();
+  const del = (id, nombre) => {
+    if (window.confirm(`¿Eliminar equipo "${nombre}"?`)) dispatch({ type: 'EQUIPO_DELETE', payload: { id } });
+  };
+
   return (
     <div>
       <div className="page-head">
@@ -10,10 +16,12 @@ export default function PageEquipos() {
           <h1 className="page-title">Equipos</h1>
           <p className="page-subtitle">Áreas de práctica y asignación de cartera</p>
         </div>
-        <button className="btn btn-primary"><Icon name="plus" size={15}/> Nuevo equipo</button>
+        <button className="btn btn-primary" onClick={() => onNew('equipo')}>
+          <Icon name="plus" size={15}/> Nuevo equipo
+        </button>
       </div>
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(320px, 1fr))', gap: 18 }}>
-        {EQUIPOS.map((eq) => (
+        {state.equipos.map((eq) => (
           <div className="card" key={eq.id} style={{ padding: 22 }}>
             <div className="between" style={{ marginBottom: 18 }}>
               <div className="row" style={{ gap: 12 }}>
@@ -25,7 +33,7 @@ export default function PageEquipos() {
                   <div className="muted" style={{ fontSize: 12.5 }}>{eq.miembros} miembros · {eq.casos} casos</div>
                 </div>
               </div>
-              <button className="menu-btn"><Icon name="more" size={15}/></button>
+              <RowMenu items={[{ label: 'Eliminar', icon: 'trash', danger: true, onClick: () => del(eq.id, eq.nombre) }]}/>
             </div>
             <div className="kv-grid" style={{ gridTemplateColumns: '1fr', gap: 12 }}>
               <div>
@@ -47,6 +55,9 @@ export default function PageEquipos() {
             </div>
           </div>
         ))}
+        {state.equipos.length === 0 && (
+          <div className="muted" style={{ padding: 24, textAlign: 'center' }}>Sin equipos creados.</div>
+        )}
       </div>
     </div>
   );

@@ -1,4 +1,5 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { useStore } from './store/StoreContext.jsx';
 import Sidebar from './components/Sidebar.jsx';
 import Topbar from './components/Topbar.jsx';
 import PageHome from './pages/PageHome.jsx';
@@ -20,21 +21,48 @@ import PagePlaceholder from './pages/PagePlaceholder.jsx';
 import ModalCreateCase from './modals/ModalCreateCase.jsx';
 import ModalCreateEvent from './modals/ModalCreateEvent.jsx';
 import ModalCreateTask from './modals/ModalCreateTask.jsx';
+import ModalCreateContacto from './modals/ModalCreateContacto.jsx';
+import ModalCreateDocumento from './modals/ModalCreateDocumento.jsx';
+import ModalCreateFactura from './modals/ModalCreateFactura.jsx';
+import ModalCreatePlantilla from './modals/ModalCreatePlantilla.jsx';
+import ModalCreateRecordatorio from './modals/ModalCreateRecordatorio.jsx';
+import ModalCreateEquipo from './modals/ModalCreateEquipo.jsx';
+import ModalCreateUsuario from './modals/ModalCreateUsuario.jsx';
 
 const user = { name: 'Ana Martínez', firstName: 'Ana', role: 'Abogada Senior', avatarIdx: 1 };
 
+const MODALS = {
+  caso: ModalCreateCase, evento: ModalCreateEvent, tarea: ModalCreateTask,
+  contacto: ModalCreateContacto, documento: ModalCreateDocumento,
+  factura: ModalCreateFactura, plantilla: ModalCreatePlantilla,
+  recordatorio: ModalCreateRecordatorio, equipo: ModalCreateEquipo, usuario: ModalCreateUsuario,
+};
+
 export default function App() {
+  const { state } = useStore();
   const [page, setPage] = useState('home');
   const [caseId, setCaseId] = useState(null);
   const [modal, setModal] = useState(null);
   const [collapsed, setCollapsed] = useState(false);
+
+  // Aplicar settings (tema / sidebar / acento / densidad) al root
+  useEffect(() => {
+    const s = state.settings || {};
+    const root = document.documentElement;
+    root.setAttribute('data-theme', s.theme || 'light');
+    root.setAttribute('data-sidebar', s.sidebar || 'dark');
+    root.setAttribute('data-accent', s.accent || 'indigo');
+    const body = document.body;
+    body.classList.remove('density-compact', 'density-standard', 'density-comfy');
+    body.classList.add(`density-${s.density || 'standard'}`);
+  }, [state.settings]);
 
   const goCase = (id, fallback) => {
     if (id) { setCaseId(id); setPage('case-detail'); }
     else if (fallback) { setPage(fallback); setCaseId(null); }
   };
   const goNav = (id) => { setPage(id); setCaseId(null); };
-  const openNew = (kind, casoId) => setModal({ kind, casoId });
+  const openNew = (kind, extra) => setModal({ kind, ...(typeof extra === 'object' ? extra : { casoId: extra }) });
 
   let content;
   if (page === 'home') content = <PageHome onCase={goCase} onNew={openNew} onNav={goNav} user={user}/>;
@@ -43,16 +71,18 @@ export default function App() {
   else if (page === 'tareas') content = <PageTasks onCase={goCase} onNew={openNew}/>;
   else if (page === 'calendario') content = <PageCalendar onNew={openNew}/>;
   else if (page === 'alertas') content = <PageAlerts onCase={goCase}/>;
-  else if (page === 'contactos') content = <PageContactos onCase={goCase}/>;
-  else if (page === 'documentos') content = <PageDocumentos onCase={goCase}/>;
+  else if (page === 'contactos') content = <PageContactos onNew={openNew}/>;
+  else if (page === 'documentos') content = <PageDocumentos onCase={goCase} onNew={openNew}/>;
   else if (page === 'reportes') content = <PageReportes/>;
-  else if (page === 'facturacion') content = <PageFacturacion/>;
-  else if (page === 'plantillas') content = <PagePlantillas/>;
-  else if (page === 'recordatorios') content = <PageRecordatorios/>;
-  else if (page === 'equipos') content = <PageEquipos/>;
-  else if (page === 'usuarios') content = <PageUsuarios/>;
+  else if (page === 'facturacion') content = <PageFacturacion onNew={openNew}/>;
+  else if (page === 'plantillas') content = <PagePlantillas onNew={openNew}/>;
+  else if (page === 'recordatorios') content = <PageRecordatorios onCase={goCase} onNew={openNew}/>;
+  else if (page === 'equipos') content = <PageEquipos onNew={openNew}/>;
+  else if (page === 'usuarios') content = <PageUsuarios onNew={openNew}/>;
   else if (page === 'config') content = <PageConfig/>;
   else content = <PagePlaceholder title="Sección" subtitle="Próximamente"/>;
+
+  const ModalComp = modal && MODALS[modal.kind];
 
   return (
     <div className="app" data-collapsed={collapsed} data-screen-label={page}>
@@ -65,10 +95,7 @@ export default function App() {
         <Topbar onCollapse={() => setCollapsed((c) => !c)} onNew={openNew}/>
         <div className="content">{content}</div>
       </div>
-
-      {modal?.kind === 'caso'   && <ModalCreateCase  onClose={() => setModal(null)}/>}
-      {modal?.kind === 'evento' && <ModalCreateEvent onClose={() => setModal(null)} casoId={modal.casoId}/>}
-      {modal?.kind === 'tarea'  && <ModalCreateTask  onClose={() => setModal(null)} casoId={modal.casoId}/>}
+      {ModalComp && <ModalComp onClose={() => setModal(null)} casoId={modal.casoId}/>}
     </div>
   );
 }
