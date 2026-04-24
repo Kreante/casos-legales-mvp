@@ -41,7 +41,12 @@ export default function PagePlantillas({ onNew }) {
         </div>
         <div style={{ padding: 18, display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))', gap: 14 }}>
           {list.map((p) => (
-            <div key={p.id} className="card" style={{ padding: 16, boxShadow: 'none' }}>
+            <div
+              key={p.id}
+              className="card"
+              style={{ padding: 16, boxShadow: 'none', cursor: 'pointer' }}
+              onClick={() => onNew('detalle-plantilla', { id: p.id })}
+            >
               <div className="between" style={{ marginBottom: 10 }}>
                 <div className="row" style={{ gap: 10 }}>
                   <div className="stat-icon blue" style={{ width: 38, height: 38, borderRadius: 8 }}>
@@ -49,7 +54,14 @@ export default function PagePlantillas({ onNew }) {
                   </div>
                   <span className="pill muted"><span className="pill-dot"/>{p.cat}</span>
                 </div>
-                <RowMenu items={[{ label: 'Eliminar', icon: 'trash', danger: true, onClick: () => del(p.id, p.nombre) }]}/>
+                <div onClick={(e) => e.stopPropagation()}>
+                  <RowMenu
+                    items={[
+                      { label: 'Ver detalle', icon: 'file', onClick: () => onNew('detalle-plantilla', { id: p.id }) },
+                      { label: 'Eliminar', icon: 'trash', danger: true, onClick: () => del(p.id, p.nombre) },
+                    ]}
+                  />
+                </div>
               </div>
               <div style={{ fontSize: 14, fontWeight: 700, color: 'var(--c-text)', marginBottom: 6, lineHeight: 1.3 }}>
                 {p.nombre}
@@ -57,7 +69,13 @@ export default function PagePlantillas({ onNew }) {
               <div className="muted" style={{ fontSize: 12, marginBottom: 14 }}>Actualizado · {p.actu}</div>
               <div className="between" style={{ fontSize: 12, color: 'var(--c-text-3)' }}>
                 <span><Icon name="check" size={11}/> {p.uso} usos</span>
-                <button className="link-btn" style={{ padding: 0 }}>Usar plantilla →</button>
+                <button
+                  className="link-btn"
+                  style={{ padding: 0 }}
+                  onClick={(e) => { e.stopPropagation(); onNew('detalle-plantilla', { id: p.id }); }}
+                >
+                  Usar plantilla →
+                </button>
               </div>
             </div>
           ))}

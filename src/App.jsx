@@ -28,6 +28,10 @@ import ModalCreatePlantilla from './modals/ModalCreatePlantilla.jsx';
 import ModalCreateRecordatorio from './modals/ModalCreateRecordatorio.jsx';
 import ModalCreateEquipo from './modals/ModalCreateEquipo.jsx';
 import ModalCreateUsuario from './modals/ModalCreateUsuario.jsx';
+import ModalDetalleFactura from './modals/ModalDetalleFactura.jsx';
+import ModalDetallePlantilla from './modals/ModalDetallePlantilla.jsx';
+import ModalDetalleEquipo from './modals/ModalDetalleEquipo.jsx';
+import ModalDetalleUsuario from './modals/ModalDetalleUsuario.jsx';
 
 const user = { name: 'Ana Martínez', firstName: 'Ana', role: 'Abogada Senior', avatarIdx: 1 };
 
@@ -36,6 +40,10 @@ const MODALS = {
   contacto: ModalCreateContacto, documento: ModalCreateDocumento,
   factura: ModalCreateFactura, plantilla: ModalCreatePlantilla,
   recordatorio: ModalCreateRecordatorio, equipo: ModalCreateEquipo, usuario: ModalCreateUsuario,
+  'detalle-factura': ModalDetalleFactura,
+  'detalle-plantilla': ModalDetallePlantilla,
+  'detalle-equipo': ModalDetalleEquipo,
+  'detalle-usuario': ModalDetalleUsuario,
 };
 
 export default function App() {
@@ -95,7 +103,15 @@ export default function App() {
         <Topbar onCollapse={() => setCollapsed((c) => !c)} onNew={openNew}/>
         <div className="content">{content}</div>
       </div>
-      {ModalComp && <ModalComp onClose={() => setModal(null)} casoId={modal.casoId}/>}
+      {ModalComp && (
+        <ModalComp
+          onClose={() => setModal(null)}
+          casoId={modal.casoId}
+          id={modal.id}
+          initialTab={modal.initialTab}
+          onCase={goCase}
+        />
+      )}
     </div>
   );
 }

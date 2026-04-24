@@ -50,8 +50,18 @@ export default function PageEquipos({ onNew }) {
               </div>
             </div>
             <div className="row" style={{ gap: 6, marginTop: 18 }}>
-              <button className="btn btn-secondary btn-sm">Ver miembros</button>
-              <button className="btn btn-secondary btn-sm">Casos asignados</button>
+              <button
+                className="btn btn-secondary btn-sm"
+                onClick={() => onNew('detalle-equipo', { id: eq.id, initialTab: 'miembros' })}
+              >
+                Ver miembros
+              </button>
+              <button
+                className="btn btn-secondary btn-sm"
+                onClick={() => onNew('detalle-equipo', { id: eq.id, initialTab: 'casos' })}
+              >
+                Casos asignados
+              </button>
             </div>
           </div>
         ))}

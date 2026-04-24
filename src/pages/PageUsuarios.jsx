@@ -8,6 +8,7 @@ export default function PageUsuarios({ onNew }) {
   const del = (id, nombre) => {
     if (window.confirm(`¿Eliminar usuario "${nombre}"?`)) dispatch({ type: 'USUARIO_DELETE', payload: { id } });
   };
+  const openDetail = (id) => onNew('detalle-usuario', { id });
 
   return (
     <div>
@@ -34,7 +35,7 @@ export default function PageUsuarios({ onNew }) {
           </thead>
           <tbody>
             {state.usuarios.map((u) => (
-              <tr key={u.id} className="row-link">
+              <tr key={u.id} className="row-link" onClick={() => openDetail(u.id)}>
                 <td>
                   <div className="row" style={{ gap: 10 }}>
                     <Avatar name={u.nombre} idx={u.idx}/>
@@ -56,10 +57,11 @@ export default function PageUsuarios({ onNew }) {
                   </span>
                 </td>
                 <td className="muted" style={{ fontSize: 12.5 }}>{u.ult}</td>
-                <td>
+                <td onClick={(e) => e.stopPropagation()}>
                   <div className="row" style={{ gap: 4, justifyContent: 'flex-end' }}>
                     <RowMenu
                       items={[
+                        { label: 'Ver perfil', icon: 'user', onClick: () => openDetail(u.id) },
                         {
                           label: u.estado === 'Activo' ? 'Desactivar' : 'Activar',
                           icon: 'check',

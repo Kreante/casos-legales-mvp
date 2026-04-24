@@ -78,18 +78,21 @@ export default function PageFacturacion({ onNew }) {
           </thead>
           <tbody>
             {facturas.map((f) => (
-              <tr key={f.id} className="row-link">
+              <tr key={f.id} className="row-link" onClick={() => onNew('detalle-factura', { id: f.id })}>
                 <td className="mono" style={{ fontWeight: 600 }}>{f.id}</td>
                 <td>{f.cliente}</td>
                 <td className="muted">{f.fecha}</td>
                 <td className="muted">{f.vto}</td>
                 <td style={{ textAlign: 'right', fontVariantNumeric: 'tabular-nums', fontWeight: 700 }}>{f.monto}</td>
                 <td><span className={`pill ${tone(f.estado)}`}><span className="pill-dot"/>{f.estado}</span></td>
-                <td>
+                <td onClick={(e) => e.stopPropagation()}>
                   <div className="row" style={{ gap: 4, justifyContent: 'flex-end' }}>
-                    <button className="menu-btn" title="Descargar"><Icon name="download" size={14}/></button>
+                    <button className="menu-btn" title="Ver detalle" onClick={() => onNew('detalle-factura', { id: f.id })}>
+                      <Icon name="arrow-right" size={14}/>
+                    </button>
                     <RowMenu
                       items={[
+                        { label: 'Ver detalle', icon: 'file', onClick: () => onNew('detalle-factura', { id: f.id }) },
                         ...(f.estado !== 'Pagada'
                           ? [{ label: 'Marcar como pagada', icon: 'check', onClick: () => dispatch({ type: 'FACTURA_MARK_PAID', payload: { id: f.id } }) }]
                           : []),
