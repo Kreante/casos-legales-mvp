@@ -1,0 +1,487 @@
+- generic [ref=e3]:
+  - complementary [ref=e4]:
+    - generic [ref=e5]:
+      - img [ref=e7]
+      - generic [ref=e10]:
+        - generic [ref=e11]: Casos Legales
+        - generic [ref=e12]: Gestión integral
+    - navigation [ref=e13]:
+      - button "Inicio" [ref=e15] [cursor=pointer]:
+        - img [ref=e16]
+        - generic [ref=e19]: Inicio
+      - generic [ref=e20]:
+        - generic [ref=e21]: Operativo
+        - button "Casos 7" [ref=e22] [cursor=pointer]:
+          - img [ref=e23]
+          - generic [ref=e26]: Casos
+          - generic [ref=e27]: "7"
+        - button "Tareas 15" [ref=e28] [cursor=pointer]:
+          - img [ref=e29]
+          - generic [ref=e32]: Tareas
+          - generic [ref=e33]: "15"
+        - button "Calendario" [ref=e34] [cursor=pointer]:
+          - img [ref=e35]
+          - generic [ref=e38]: Calendario
+        - button "Contactos" [ref=e39] [cursor=pointer]:
+          - img [ref=e40]
+          - generic [ref=e45]: Contactos
+        - button "Documentos" [ref=e46] [cursor=pointer]:
+          - img [ref=e47]
+          - generic [ref=e51]: Documentos
+        - button "Alertas 11" [ref=e52] [cursor=pointer]:
+          - img [ref=e53]
+          - generic [ref=e56]: Alertas
+          - generic [ref=e57]: "11"
+      - generic [ref=e58]:
+        - generic [ref=e59]: Gestión
+        - button "Reportes" [ref=e60] [cursor=pointer]:
+          - img [ref=e61]
+          - generic [ref=e64]: Reportes
+        - button "Facturación" [ref=e65] [cursor=pointer]:
+          - img [ref=e66]
+          - generic [ref=e68]: Facturación
+        - button "Plantillas" [ref=e69] [cursor=pointer]:
+          - img [ref=e70]
+          - generic [ref=e74]: Plantillas
+        - button "Recordatorios" [ref=e75] [cursor=pointer]:
+          - img [ref=e76]
+          - generic [ref=e79]: Recordatorios
+      - generic [ref=e80]:
+        - generic [ref=e81]: Configuración
+        - button "Equipos" [ref=e82] [cursor=pointer]:
+          - img [ref=e83]
+          - generic [ref=e88]: Equipos
+        - button "Usuarios" [ref=e89] [cursor=pointer]:
+          - img [ref=e90]
+          - generic [ref=e93]: Usuarios
+        - button "Configuración" [ref=e94] [cursor=pointer]:
+          - img [ref=e95]
+          - generic [ref=e98]: Configuración
+    - generic [ref=e99] [cursor=pointer]:
+      - generic "Ana Martínez" [ref=e100]: AM
+      - generic [ref=e101]:
+        - generic [ref=e102]: Ana Martínez
+        - generic [ref=e103]: Abogada Senior
+      - img [ref=e104]
+  - generic [ref=e106]:
+    - generic [ref=e107]:
+      - button "Contraer barra lateral" [ref=e108] [cursor=pointer]:
+        - img [ref=e109]
+      - generic [ref=e111]:
+        - img [ref=e112]
+        - textbox "Buscar casos, clientes, expedientes…" [ref=e115]
+        - generic [ref=e116]: ⌘K
+      - generic [ref=e117]:
+        - button "Notificaciones" [ref=e118] [cursor=pointer]:
+          - img [ref=e119]
+        - button "Mensajes" [ref=e123] [cursor=pointer]:
+          - img [ref=e124]
+        - button "Ayuda" [ref=e126] [cursor=pointer]:
+          - img [ref=e127]
+        - button "Nuevo caso" [ref=e131] [cursor=pointer]:
+          - img [ref=e132]
+          - text: Nuevo caso
+    - generic [ref=e135]:
+      - generic [ref=e136]:
+        - generic [ref=e137]:
+          - heading "Hola, Ana" [level=1] [ref=e138]:
+            - text: Hola,
+            - emphasis [ref=e139]: Ana
+          - paragraph [ref=e140]: Aquí tienes el resumen operativo de hoy.
+        - generic [ref=e141]:
+          - button "Ver calendario" [ref=e142] [cursor=pointer]:
+            - img [ref=e143]
+            - text: Ver calendario
+          - button "Nuevo caso" [ref=e146] [cursor=pointer]:
+            - img [ref=e147]
+            - text: Nuevo caso
+      - generic [ref=e149]:
+        - generic [ref=e150]:
+          - generic [ref=e151]:
+            - generic [ref=e152]: Casos activos
+            - generic [ref=e153]: "7"
+            - generic [ref=e154]:
+              - img [ref=e155]
+              - strong [ref=e157]: 8%
+              - text: vs. periodo anterior
+          - img [ref=e159]
+        - generic [ref=e162]:
+          - generic [ref=e163]:
+            - generic [ref=e164]: Tareas pendientes
+            - generic [ref=e165]: "15"
+            - generic [ref=e166]:
+              - img [ref=e167]
+              - strong [ref=e169]: 12%
+              - text: vs. periodo anterior
+          - img [ref=e171]
+        - generic [ref=e174]:
+          - generic [ref=e175]:
+            - generic [ref=e176]: Audiencias este mes
+            - generic [ref=e177]: "2"
+            - generic [ref=e178]:
+              - img [ref=e179]
+              - strong [ref=e181]: 7%
+              - text: vs. periodo anterior
+          - img [ref=e183]
+        - generic [ref=e187]:
+          - generic [ref=e188]:
+            - generic [ref=e189]: Eventos completados
+            - generic [ref=e190]: "3"
+            - generic [ref=e191]:
+              - img [ref=e192]
+              - strong [ref=e194]: 15%
+              - text: vs. periodo anterior
+          - img [ref=e196]
+        - generic [ref=e200]:
+          - generic [ref=e201]:
+            - generic [ref=e202]: Casos cerrados
+            - generic [ref=e203]: "1"
+            - generic [ref=e204]:
+              - img [ref=e205]
+              - strong [ref=e207]: 9%
+              - text: vs. periodo anterior
+          - img [ref=e209]
+      - generic [ref=e211]:
+        - generic [ref=e212]:
+          - generic [ref=e213]:
+            - generic [ref=e214]:
+              - heading "Tareas" [level=3] [ref=e215]
+              - generic [ref=e216]:
+                - button "Todos los equipos" [ref=e217] [cursor=pointer]:
+                  - img [ref=e218]
+                  - text: Todos los equipos
+                  - img [ref=e223]
+                - button [ref=e225] [cursor=pointer]:
+                  - img [ref=e226]
+            - generic [ref=e230]:
+              - generic [ref=e231]:
+                - generic [ref=e232]:
+                  - text: Atrasada
+                  - generic [ref=e233]: "6"
+                - generic [ref=e234] [cursor=pointer]:
+                  - generic [ref=e235]:
+                    - generic [ref=e236]: Revisión de contrato
+                    - generic [ref=e237]: 12 abr
+                  - generic [ref=e238]: "Caso: Pérez c/ Industrias del Norte"
+                - generic [ref=e239] [cursor=pointer]:
+                  - generic [ref=e240]:
+                    - generic [ref=e241]: Presentar escrito de descargo
+                    - generic [ref=e242]: 14 abr
+                  - generic [ref=e243]: "Caso: Cooperativa El Surco c/ Inmobiliaria Central"
+                - generic [ref=e244] [cursor=pointer]:
+                  - generic [ref=e245]:
+                    - generic [ref=e246]: Enviar documentación al perito
+                    - generic [ref=e247]: 15 abr
+                  - generic [ref=e248]: "Caso: Ramírez c/ Comercializadora Sur"
+                - generic [ref=e249] [cursor=pointer]:
+                  - generic [ref=e250]:
+                    - generic [ref=e251]: Responder traslado de demanda
+                    - generic [ref=e252]: 16 abr
+                  - generic [ref=e253]: "Caso: López c/ Constructora Andina"
+                - generic [ref=e254] [cursor=pointer]:
+                  - generic [ref=e255]:
+                    - generic [ref=e256]: Recopilar prueba documental
+                    - generic [ref=e257]: 17 abr
+                  - generic [ref=e258]: "Caso: TechNova c/ Distribuidora Andina"
+                - button "Ver todas (6)" [ref=e260] [cursor=pointer]
+              - generic [ref=e261]:
+                - generic [ref=e262]:
+                  - text: Próxima
+                  - generic [ref=e263]: "4"
+                - generic [ref=e264] [cursor=pointer]:
+                  - generic [ref=e265]:
+                    - generic [ref=e266]: Vencimiento contrato locación
+                    - generic [ref=e267]: 25 abr · 16:00
+                  - generic [ref=e268]: "Caso: TechNova c/ Distribuidora Andina"
+                - generic [ref=e269] [cursor=pointer]:
+                  - generic [ref=e270]:
+                    - generic [ref=e271]: Reunión con cliente
+                    - generic [ref=e272]: 25 abr · 11:00
+                  - generic [ref=e273]: "Caso: Vega Corporativo c/ Estado Provincial"
+                - generic [ref=e274] [cursor=pointer]:
+                  - generic [ref=e275]:
+                    - generic [ref=e276]: Elaborar contestación
+                    - generic [ref=e277]: 26 abr · 15:00
+                  - generic [ref=e278]: "Caso: Sánchez c/ Fernández — Divorcio"
+                - generic [ref=e279] [cursor=pointer]:
+                  - generic [ref=e280]:
+                    - generic [ref=e281]: Revisión de pruebas
+                    - generic [ref=e282]: 27 abr
+                  - generic [ref=e283]: "Caso: Pérez c/ Industrias del Norte"
+              - generic [ref=e284]:
+                - generic [ref=e285]:
+                  - text: Pendiente
+                  - generic [ref=e286]: "5"
+                - generic [ref=e287] [cursor=pointer]:
+                  - generic [ref=e288]:
+                    - generic [ref=e289]: Análisis de documentación
+                    - generic [ref=e290]: 4 may
+                  - generic [ref=e291]: "Caso: Vega Corporativo c/ Estado Provincial"
+                - generic [ref=e292] [cursor=pointer]:
+                  - generic [ref=e293]:
+                    - generic [ref=e294]: Informe de viabilidad
+                    - generic [ref=e295]: 9 may
+                  - generic [ref=e296]: "Caso: Ramírez c/ Comercializadora Sur"
+                - generic [ref=e297] [cursor=pointer]:
+                  - generic [ref=e298]:
+                    - generic [ref=e299]: Notificación judicial
+                    - generic [ref=e300]: 12 may
+                  - generic [ref=e301]: "Caso: Ramírez c/ Comercializadora Sur"
+                - generic [ref=e302] [cursor=pointer]:
+                  - generic [ref=e303]:
+                    - generic [ref=e304]: Revisión de anexos
+                    - generic [ref=e305]: 14 may
+                  - generic [ref=e306]: "Caso: TechNova c/ Distribuidora Andina"
+                - generic [ref=e307] [cursor=pointer]:
+                  - generic [ref=e308]:
+                    - generic [ref=e309]: Informar al cliente
+                    - generic [ref=e310]: 19 may
+                  - generic [ref=e311]: "Caso: López c/ Constructora Andina"
+              - generic [ref=e312]:
+                - generic [ref=e313]:
+                  - text: Completada
+                  - generic [ref=e314]: "4"
+                - generic [ref=e315] [cursor=pointer]:
+                  - generic [ref=e316]:
+                    - generic [ref=e317]: Contrato de confidencialidad
+                    - generic [ref=e318]: 17 abr
+                  - generic [ref=e319]: "Caso: TechNova c/ Distribuidora Andina"
+                - generic [ref=e320] [cursor=pointer]:
+                  - generic [ref=e321]:
+                    - generic [ref=e322]: Escrito de contestación
+                    - generic [ref=e323]: 16 abr
+                  - generic [ref=e324]: "Caso: Sánchez c/ Fernández — Divorcio"
+                - generic [ref=e325] [cursor=pointer]:
+                  - generic [ref=e326]:
+                    - generic [ref=e327]: Pago de tasa de justicia
+                    - generic [ref=e328]: 14 abr
+                  - generic [ref=e329]: "Caso: Cooperativa El Surco c/ Inmobiliaria Central"
+                - generic [ref=e330] [cursor=pointer]:
+                  - generic [ref=e331]:
+                    - generic [ref=e332]: Informe pericial entregado
+                    - generic [ref=e333]: 12 abr
+                  - generic [ref=e334]: "Caso: Pérez c/ Industrias del Norte"
+          - generic [ref=e335]:
+            - generic [ref=e336]:
+              - heading "Casos recientes" [level=3] [ref=e337]
+              - button "Ver todos los casos" [ref=e338] [cursor=pointer]:
+                - text: Ver todos los casos
+                - img [ref=e339]
+            - table [ref=e341]:
+              - rowgroup [ref=e342]:
+                - row "Caso Cliente Estado Riesgo Abogado responsable Última actualización" [ref=e343]:
+                  - columnheader "Caso" [ref=e344]
+                  - columnheader "Cliente" [ref=e345]
+                  - columnheader "Estado" [ref=e346]
+                  - columnheader "Riesgo" [ref=e347]
+                  - columnheader "Abogado responsable" [ref=e348]
+                  - columnheader "Última actualización" [ref=e349]
+                  - columnheader [ref=e350]
+              - rowgroup [ref=e351]:
+                - row "00123/2026 Pérez c/ Industrias del Norte Juan Pérez Industrias del Norte S.A. En trámite Atención AM Ana Martínez 23 abr 2026, 10:45" [ref=e352]:
+                  - cell "00123/2026 Pérez c/ Industrias del Norte" [ref=e353]:
+                    - generic [ref=e354]:
+                      - img [ref=e356]
+                      - generic [ref=e359]:
+                        - generic [ref=e360]: 00123/2026
+                        - generic [ref=e361]: Pérez c/ Industrias del Norte
+                  - cell "Juan Pérez Industrias del Norte S.A." [ref=e362]:
+                    - text: Juan Pérez
+                    - generic [ref=e363]: Industrias del Norte S.A.
+                  - cell "En trámite" [ref=e364]:
+                    - generic [ref=e365]: En trámite
+                  - cell "Atención" [ref=e367]:
+                    - generic [ref=e368]: Atención
+                  - cell "AM Ana Martínez" [ref=e370]:
+                    - generic [ref=e371]:
+                      - generic "Ana Martínez" [ref=e372]: AM
+                      - generic [ref=e373]: Ana Martínez
+                  - cell "23 abr 2026, 10:45" [ref=e374]
+                  - cell [ref=e375]:
+                    - button [ref=e376] [cursor=pointer]:
+                      - img [ref=e377]
+                - row "00456/2026 López c/ Constructora Andina María López Constructora Andina SRL En proceso Crítico DR Diego Ramírez 23 abr 2026, 09:15" [ref=e381]:
+                  - cell "00456/2026 López c/ Constructora Andina" [ref=e382]:
+                    - generic [ref=e383]:
+                      - img [ref=e385]
+                      - generic [ref=e388]:
+                        - generic [ref=e389]: 00456/2026
+                        - generic [ref=e390]: López c/ Constructora Andina
+                  - cell "María López Constructora Andina SRL" [ref=e391]:
+                    - text: María López
+                    - generic [ref=e392]: Constructora Andina SRL
+                  - cell "En proceso" [ref=e393]:
+                    - generic [ref=e394]: En proceso
+                  - cell "Crítico" [ref=e396]:
+                    - generic [ref=e397]: Crítico
+                  - cell "DR Diego Ramírez" [ref=e399]:
+                    - generic [ref=e400]:
+                      - generic "Diego Ramírez" [ref=e401]: DR
+                      - generic [ref=e402]: Diego Ramírez
+                  - cell "23 abr 2026, 09:15" [ref=e403]
+                  - cell [ref=e404]:
+                    - button [ref=e405] [cursor=pointer]:
+                      - img [ref=e406]
+                - row "00789/2026 Ramírez c/ Comercializadora Sur Carlos Ramírez Comercializadora Sur S.A. En trámite Atención LS Laura Sánchez 22 abr 2026, 16:30" [ref=e410]:
+                  - cell "00789/2026 Ramírez c/ Comercializadora Sur" [ref=e411]:
+                    - generic [ref=e412]:
+                      - img [ref=e414]
+                      - generic [ref=e417]:
+                        - generic [ref=e418]: 00789/2026
+                        - generic [ref=e419]: Ramírez c/ Comercializadora Sur
+                  - cell "Carlos Ramírez Comercializadora Sur S.A." [ref=e420]:
+                    - text: Carlos Ramírez
+                    - generic [ref=e421]: Comercializadora Sur S.A.
+                  - cell "En trámite" [ref=e422]:
+                    - generic [ref=e423]: En trámite
+                  - cell "Atención" [ref=e425]:
+                    - generic [ref=e426]: Atención
+                  - cell "LS Laura Sánchez" [ref=e428]:
+                    - generic [ref=e429]:
+                      - generic "Laura Sánchez" [ref=e430]: LS
+                      - generic [ref=e431]: Laura Sánchez
+                  - cell "22 abr 2026, 16:30" [ref=e432]
+                  - cell [ref=e433]:
+                    - button [ref=e434] [cursor=pointer]:
+                      - img [ref=e435]
+                - row "01011/2026 Sánchez c/ Fernández — Divorcio Laura Sánchez Persona física En proceso Bajo AM Ana Martínez 22 abr 2026, 11:20" [ref=e439]:
+                  - cell "01011/2026 Sánchez c/ Fernández — Divorcio" [ref=e440]:
+                    - generic [ref=e441]:
+                      - img [ref=e443]
+                      - generic [ref=e446]:
+                        - generic [ref=e447]: 01011/2026
+                        - generic [ref=e448]: Sánchez c/ Fernández — Divorcio
+                  - cell "Laura Sánchez Persona física" [ref=e449]:
+                    - text: Laura Sánchez
+                    - generic [ref=e450]: Persona física
+                  - cell "En proceso" [ref=e451]:
+                    - generic [ref=e452]: En proceso
+                  - cell "Bajo" [ref=e454]:
+                    - generic [ref=e455]: Bajo
+                  - cell "AM Ana Martínez" [ref=e457]:
+                    - generic [ref=e458]:
+                      - generic "Ana Martínez" [ref=e459]: AM
+                      - generic [ref=e460]: Ana Martínez
+                  - cell "22 abr 2026, 11:20" [ref=e461]
+                  - cell [ref=e462]:
+                    - button [ref=e463] [cursor=pointer]:
+                      - img [ref=e464]
+                - row "01234/2025 Banco del Plata c/ Transportes del Valle Banco del Plata Transportes del Valle S.A. Cerrado Bajo DR Diego Ramírez 19 abr 2026, 15:45" [ref=e468]:
+                  - cell "01234/2025 Banco del Plata c/ Transportes del Valle" [ref=e469]:
+                    - generic [ref=e470]:
+                      - img [ref=e472]
+                      - generic [ref=e475]:
+                        - generic [ref=e476]: 01234/2025
+                        - generic [ref=e477]: Banco del Plata c/ Transportes del Valle
+                  - cell "Banco del Plata Transportes del Valle S.A." [ref=e478]:
+                    - text: Banco del Plata
+                    - generic [ref=e479]: Transportes del Valle S.A.
+                  - cell "Cerrado" [ref=e480]:
+                    - generic [ref=e481]: Cerrado
+                  - cell "Bajo" [ref=e483]:
+                    - generic [ref=e484]: Bajo
+                  - cell "DR Diego Ramírez" [ref=e486]:
+                    - generic [ref=e487]:
+                      - generic "Diego Ramírez" [ref=e488]: DR
+                      - generic [ref=e489]: Diego Ramírez
+                  - cell "19 abr 2026, 15:45" [ref=e490]
+                  - cell [ref=e491]:
+                    - button [ref=e492] [cursor=pointer]:
+                      - img [ref=e493]
+                - row "01567/2026 TechNova c/ Distribuidora Andina TechNova Solutions Distribuidora Andina S.A. En proceso Atención LS Laura Sánchez 19 abr 2026, 09:10" [ref=e497]:
+                  - cell "01567/2026 TechNova c/ Distribuidora Andina" [ref=e498]:
+                    - generic [ref=e499]:
+                      - img [ref=e501]
+                      - generic [ref=e504]:
+                        - generic [ref=e505]: 01567/2026
+                        - generic [ref=e506]: TechNova c/ Distribuidora Andina
+                  - cell "TechNova Solutions Distribuidora Andina S.A." [ref=e507]:
+                    - text: TechNova Solutions
+                    - generic [ref=e508]: Distribuidora Andina S.A.
+                  - cell "En proceso" [ref=e509]:
+                    - generic [ref=e510]: En proceso
+                  - cell "Atención" [ref=e512]:
+                    - generic [ref=e513]: Atención
+                  - cell "LS Laura Sánchez" [ref=e515]:
+                    - generic [ref=e516]:
+                      - generic "Laura Sánchez" [ref=e517]: LS
+                      - generic [ref=e518]: Laura Sánchez
+                  - cell "19 abr 2026, 09:10" [ref=e519]
+                  - cell [ref=e520]:
+                    - button [ref=e521] [cursor=pointer]:
+                      - img [ref=e522]
+        - generic [ref=e526]:
+          - generic [ref=e527]:
+            - heading "Próximos eventos y plazos" [level=3] [ref=e528]
+            - button "Ver calendario" [ref=e529] [cursor=pointer]
+          - generic [ref=e530]:
+            - generic [ref=e531]:
+              - generic [ref=e532]: Vencido
+              - generic [ref=e534]: "3"
+            - generic [ref=e535] [cursor=pointer]:
+              - generic [ref=e536]:
+                - generic [ref=e537]: Pago de tasa judicial
+                - generic [ref=e538]: 12 abr
+              - generic [ref=e539]: "Caso: Cooperativa El Surco c/ Inmobiliaria Central"
+            - generic [ref=e540] [cursor=pointer]:
+              - generic [ref=e541]:
+                - generic [ref=e542]: Presentar escrito de descargo
+                - generic [ref=e543]: 15 abr
+              - generic [ref=e544]: "Caso: Cooperativa El Surco c/ Inmobiliaria Central"
+            - generic [ref=e545] [cursor=pointer]:
+              - generic [ref=e546]:
+                - generic [ref=e547]: Audiencia preliminar
+                - generic [ref=e548]: 24 abr · 10:00
+              - generic [ref=e549]: "Caso: López c/ Constructora Andina"
+          - generic [ref=e550]:
+            - generic [ref=e551]:
+              - generic [ref=e552]: Próximo
+              - generic [ref=e554]: "2"
+            - generic [ref=e555] [cursor=pointer]:
+              - generic [ref=e556]:
+                - generic [ref=e557]: Vencimiento contrato
+                - generic [ref=e558]: 25 abr · 16:00
+              - generic [ref=e559]: "Caso: TechNova c/ Distribuidora Andina"
+            - generic [ref=e560] [cursor=pointer]:
+              - generic [ref=e561]:
+                - generic [ref=e562]: Reunión con cliente
+                - generic [ref=e563]: 25 abr · 11:00
+              - generic [ref=e564]: "Caso: Vega Corporativo c/ Estado Provincial"
+          - generic [ref=e565]:
+            - generic [ref=e566]:
+              - generic [ref=e567]: Pendiente
+              - generic [ref=e569]: "3"
+            - generic [ref=e570] [cursor=pointer]:
+              - generic [ref=e571]:
+                - generic [ref=e572]: Audiencia de prueba
+                - generic [ref=e573]: 5 may · 09:30
+              - generic [ref=e574]: "Caso: Pérez c/ Industrias del Norte"
+            - generic [ref=e575] [cursor=pointer]:
+              - generic [ref=e576]:
+                - generic [ref=e577]: Cierre de etapa probatoria
+                - generic [ref=e578]: 8 may
+              - generic [ref=e579]: "Caso: Ramírez c/ Comercializadora Sur"
+            - generic [ref=e580] [cursor=pointer]:
+              - generic [ref=e581]:
+                - generic [ref=e582]: Audiencia de juicio
+                - generic [ref=e583]: 15 may · 10:00
+              - generic [ref=e584]: "Caso: TechNova c/ Distribuidora Andina"
+          - generic [ref=e585]:
+            - generic [ref=e586]:
+              - generic [ref=e587]: Completado
+              - generic [ref=e589]: "3"
+            - generic [ref=e590] [cursor=pointer]:
+              - generic [ref=e591]:
+                - generic [ref=e592]: Audiencia de conciliación
+                - generic [ref=e593]: 17 abr
+              - generic [ref=e594]: "Caso: Sánchez c/ Fernández — Divorcio"
+            - generic [ref=e595] [cursor=pointer]:
+              - generic [ref=e596]:
+                - generic [ref=e597]: Notificación enviada
+                - generic [ref=e598]: 18 abr
+              - generic [ref=e599]: "Caso: Banco del Plata c/ Transportes del Valle"
+            - generic [ref=e600] [cursor=pointer]:
+              - generic [ref=e601]:
+                - generic [ref=e602]: Informe legal entregado
+                - generic [ref=e603]: 19 abr
+              - generic [ref=e604]: "Caso: Cooperativa El Surco c/ Inmobiliaria Central"

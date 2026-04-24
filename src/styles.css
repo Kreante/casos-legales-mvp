@@ -815,7 +815,7 @@ button { font: inherit; color: inherit; }
 /* Event/task row */
 .evt-row, .tk-row {
   display: grid;
-  grid-template-columns: 4px 26px minmax(0, 1fr) auto auto auto;
+  grid-template-columns: 28px minmax(0, 1fr) auto auto auto;
   gap: 14px;
   align-items: center;
   padding: 12px 0;
