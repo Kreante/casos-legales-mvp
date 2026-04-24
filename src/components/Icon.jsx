@@ -43,6 +43,7 @@ export default function Icon({ name, size = 16, stroke = 1.75, ...props }) {
     case 'pencil':       return <svg {...common}><path d="M16 4l4 4-12 12H4v-4z"/></svg>;
     case 'trash':        return <svg {...common}><path d="M3 6h18"/><path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/><path d="M6 6v14a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V6"/></svg>;
     case 'building':     return <svg {...common}><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M9 21V9h6v12"/><path d="M7 7h2M15 7h2M7 11h2M15 11h2M7 15h2M15 15h2"/></svg>;
+    case 'star':         return <svg {...common}><path d="m12 3 3 6 7 1-5 5 1 7-6-3-6 3 1-7-5-5 7-1z"/></svg>;
     default: return null;
   }
 }

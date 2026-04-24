@@ -7,24 +7,21 @@ import PageCaseDetail from './pages/PageCaseDetail.jsx';
 import PageTasks from './pages/PageTasks.jsx';
 import PageCalendar from './pages/PageCalendar.jsx';
 import PageAlerts from './pages/PageAlerts.jsx';
+import PageContactos from './pages/PageContactos.jsx';
+import PageDocumentos from './pages/PageDocumentos.jsx';
+import PageReportes from './pages/PageReportes.jsx';
+import PageFacturacion from './pages/PageFacturacion.jsx';
+import PagePlantillas from './pages/PagePlantillas.jsx';
+import PageRecordatorios from './pages/PageRecordatorios.jsx';
+import PageEquipos from './pages/PageEquipos.jsx';
+import PageUsuarios from './pages/PageUsuarios.jsx';
+import PageConfig from './pages/PageConfig.jsx';
 import PagePlaceholder from './pages/PagePlaceholder.jsx';
 import ModalCreateCase from './modals/ModalCreateCase.jsx';
 import ModalCreateEvent from './modals/ModalCreateEvent.jsx';
 import ModalCreateTask from './modals/ModalCreateTask.jsx';
 
 const user = { name: 'Ana Martínez', firstName: 'Ana', role: 'Abogada Senior', avatarIdx: 1 };
-
-const PLACEHOLDERS = {
-  contactos:     ['Contactos', 'Clientes, contrapartes y referentes profesionales'],
-  documentos:    ['Documentos', 'Repositorio centralizado de archivos y plantillas'],
-  reportes:      ['Reportes', 'Métricas operativas y financieras del estudio'],
-  facturacion:   ['Facturación', 'Honorarios, gastos y notas de cobro'],
-  plantillas:    ['Plantillas', 'Modelos de escritos y documentos reutilizables'],
-  recordatorios: ['Recordatorios', 'Avisos manuales y agenda interna'],
-  equipos:       ['Equipos', 'Configuración de áreas y responsables'],
-  usuarios:      ['Usuarios', 'Altas, bajas y permisos del estudio'],
-  config:        ['Configuración', 'Preferencias del sistema y notificaciones'],
-};
 
 export default function App() {
   const [page, setPage] = useState('home');
@@ -46,10 +43,16 @@ export default function App() {
   else if (page === 'tareas') content = <PageTasks onCase={goCase} onNew={openNew}/>;
   else if (page === 'calendario') content = <PageCalendar onNew={openNew}/>;
   else if (page === 'alertas') content = <PageAlerts onCase={goCase}/>;
-  else if (PLACEHOLDERS[page]) {
-    const [t, s] = PLACEHOLDERS[page];
-    content = <PagePlaceholder title={t} subtitle={s}/>;
-  } else content = <PagePlaceholder title="Sección" subtitle="Próximamente"/>;
+  else if (page === 'contactos') content = <PageContactos onCase={goCase}/>;
+  else if (page === 'documentos') content = <PageDocumentos onCase={goCase}/>;
+  else if (page === 'reportes') content = <PageReportes/>;
+  else if (page === 'facturacion') content = <PageFacturacion/>;
+  else if (page === 'plantillas') content = <PagePlantillas/>;
+  else if (page === 'recordatorios') content = <PageRecordatorios/>;
+  else if (page === 'equipos') content = <PageEquipos/>;
+  else if (page === 'usuarios') content = <PageUsuarios/>;
+  else if (page === 'config') content = <PageConfig/>;
+  else content = <PagePlaceholder title="Sección" subtitle="Próximamente"/>;
 
   return (
     <div className="app" data-collapsed={collapsed} data-screen-label={page}>
